@@ -7,7 +7,7 @@ const ListarServicos = () => {
 
   useEffect(() => {
     // Faz a requisição para buscar os serviços na API
-    fetch('http://localhost:4000/api/servicos')
+    fetch('http://localhost:3010/api/servicos')
       .then((response) => response.json())
       .then((data) => setServicos(data))
       .catch((error) => console.error('Erro ao buscar serviços:', error));
@@ -15,7 +15,7 @@ const ListarServicos = () => {
 
   const handleDelete = (id_servico) => {
     // Faz a requisição para excluir o serviço no backend
-    fetch(`http://localhost:4000/api/servicos/${id_servico}`, {
+    fetch(`http://localhost:3010/api/servicos/${id_servico}`, {
       method: 'DELETE',
     })
       .then((response) => {

@@ -26,7 +26,7 @@ const EditServico = () => {
     }
 
     // Atualiza o serviço no backend
-    fetch(`http://localhost:4000/api/servicos/${servico.id_servico}`, {
+    fetch(`http://localhost:3010/api/servicos/${servico.id_servico}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const EditServico = () => {
       .then((response) => {
         if (response.ok) {
           alert('Serviço atualizado com sucesso!');
-          navigate('/'); // Navega para a lista de serviços após a atualização
+          navigate('/ListarServicos'); // Navega para a lista de serviços após a atualização
         } else {
           alert('Erro ao atualizar serviço');
         }

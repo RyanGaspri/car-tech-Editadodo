@@ -6,7 +6,6 @@ import Line from './components/Line';
 import Footer from './components/Footer';
 import Portfolio from './components/Portfolio';
 import Servicos from './components/Servicos';
-import Form from './components/Form';
 import Avaliacao from './components/Avaliacao';
 import Sobre from './components/Sobre';
 import Login from './components/Login';
@@ -48,7 +47,6 @@ function App() {
           <Route path="/about" element={<Sobre />} />
           <Route path="/CadastroFerramenta" element={<CadastroFerramenta />} />
           <Route path="/agendamento" element={<Agendamento />} />
-          <Route path="/form" element={<Form />} />
         </Routes>
       </section>
 

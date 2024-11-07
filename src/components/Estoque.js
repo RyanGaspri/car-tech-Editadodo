@@ -14,7 +14,7 @@ function InventoryManagement() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/ferramentas')
+    fetch('http://localhost:3010/api/ferramentas')
       .then((response) => response.json())
       .then((data) => setItems(data))
       .catch((error) => console.error('Erro ao buscar ferramentas:', error));
@@ -36,23 +36,27 @@ function InventoryManagement() {
   };
 
   const handleDelete = (id_ferramenta) => {
+    const confirmDelete = window.confirm('Tem certeza que deseja excluir esta ferramenta?');
+    if (!confirmDelete) return;
+  
     // Faz a requisição para excluir a ferramenta no backend
-    fetch(`http://localhost:4000/api/ferramentas/${id_ferramenta}`, {
+    fetch(`http://localhost:3010/api/ferramentas/${id_ferramenta}`, {
       method: 'DELETE',
     })
-    .then((response) => {
-      if (response.ok) {
-        // Se a exclusão for bem-sucedida, atualiza o estado para remover a ferramenta
-        setItems(items.filter(item => item.id_ferramenta !== id_ferramenta));
-      } else {
-        alert('Erro ao excluir ferramenta');
-      }
-    })
-    .catch((error) => {
-      console.error('Erro ao excluir ferramenta:', error);
-      alert('Erro de conexão ao excluir ferramenta');
-    });
+      .then((response) => {
+        if (response.ok) {
+          // Se a exclusão for bem-sucedida, atualiza o estado para remover a ferramenta
+          setItems(items.filter(item => item.id_ferramenta !== id_ferramenta));
+        } else {
+          alert('Erro ao excluir ferramenta');
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao excluir ferramenta:', error);
+        alert('Erro de conexão ao excluir ferramenta');
+      });
   };
+  
   
 
   return (

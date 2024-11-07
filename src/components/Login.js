@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault(); // Evita o comportamento padrão de recarregar a página
 
     try {
-      const response = await fetch('http://localhost:4000/api/administradores/login', {
+      const response = await fetch('http://localhost:3010/api/administradores/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,33 +1,37 @@
 import React, { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 const CadastrarServico = () => {
   const [preco, setPreco] = useState(''); // Corrigido
   const [statusserv, setStatusserv] = useState(''); // Corrigido
   const [descricao, setDescricao] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const novoServico = {
       preco,
       status_servico: statusserv,
       descricao,
     };
-
+  
     try {
-      const response = await fetch('http://localhost:4000/api/servicos', {
+      const response = await fetch('http://localhost:3010/api/servicos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(novoServico),
       });
-
+  
       if (response.ok) {
         alert('Serviço cadastrado com sucesso!');
         setPreco('');
         setStatusserv('');
         setDescricao('');
+        navigate('/estoque'); // Redireciona para a tela de estoque
       } else {
         alert('Erro ao cadastrar serviço');
       }

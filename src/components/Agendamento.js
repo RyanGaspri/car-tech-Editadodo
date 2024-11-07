@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Agendamento() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ function Agendamento() {
     contato_cliente: '',
     data_agendamento: '',
   });
+
+  const navigate = useNavigate(); // Coloque useNavigate aqui
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,12 +24,12 @@ function Agendamento() {
     const updatedFormData = { ...formData, data_agendamento: formattedDate };
   
     try {
-      const response = await fetch('http://localhost:4000/api/agendamentos', {
+      const response = await fetch('http://localhost:3010/api/agendamentos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedFormData), // Envia o formData com a data formatada
+        body: JSON.stringify(updatedFormData),
       });
   
       if (response.ok) {
@@ -38,6 +41,7 @@ function Agendamento() {
           contato_cliente: '',
           data_agendamento: '',
         });
+        navigate('/AgendamentosList'); // Redireciona para a tela de estoque
       } else {
         alert('Erro ao registrar agendamento');
       }

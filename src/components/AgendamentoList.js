@@ -8,7 +8,7 @@ function AgendamentosList() {
   useEffect(() => {
     const fetchAgendamentos = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/agendamentos');
+        const response = await fetch('http://localhost:3010/api/agendamentos');
         const data = await response.json();
         setAgendamentos(data);
       } catch (error) {
@@ -24,48 +24,47 @@ function AgendamentosList() {
   };
 
   const handleDelete = (id_agendamento) => {
-    // Certifique-se de que o id é um número
+    const confirmDelete = window.confirm('Tem certeza que deseja excluir este agendamento?');
+    if (!confirmDelete) return;
+  
     const id = parseInt(id_agendamento, 10);
     if (isNaN(id)) {
-        alert('ID inválido');
-        return;
+      alert('ID inválido');
+      return;
     }
-
-    // Agora faça a requisição para excluir o agendamento no backend
-    fetch(`http://localhost:4000/api/agendamentos/${id}`, {
-        method: 'DELETE',
+  
+    fetch(`http://localhost:3010/api/agendamentos/${id}`, {
+      method: 'DELETE',
     })
-    .then((response) => {
+      .then((response) => {
         if (response.ok) {
-            alert('Agendamento deletado com sucesso!');
-            setAgendamentos(agendamentos.filter((agendamento) => agendamento.id_agendamento !== id));
+          alert('Agendamento deletado com sucesso!');
+          setAgendamentos(agendamentos.filter((agendamento) => agendamento.id_agendamento !== id));
         } else {
-            alert('Erro ao excluir agendamento');
+          alert('Erro ao excluir agendamento');
         }
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.error('Erro ao excluir agendamento:', error);
         alert('Erro de conexão ao excluir agendamento');
-    });
-};
+      });
+  };
 
-  
-  
   const styles = {
     container: {
-      position: 'fixed', // Ocupa toda a tela
+      position: 'fixed',
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: '#333333', // Fundo da tela
+      backgroundColor: '#333333',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       paddingTop: '20px',
     },
     card: {
-      backgroundColor: '#444444', // Fundo do card
+      backgroundColor: '#444444',
       color: '#ffffff',
       padding: '20px',
       borderRadius: '8px',
@@ -118,14 +117,16 @@ function AgendamentosList() {
           <thead>
             <tr style={styles.tableHeader}>
               <th style={styles.tableCell}>Nome Cliente</th>
+              <th style={styles.tableCell}>Contato</th> {/* Coluna do contato */}
               <th style={styles.tableCell}>Data Agendamento</th>
               <th style={styles.tableCell}>Ações</th>
             </tr>
           </thead>
           <tbody>
             {agendamentos.map((agendamento) => (
-              <tr key={agendamento.id} style={styles.tableRow}>
+              <tr key={agendamento.id_agendamento} style={styles.tableRow}>
                 <td style={styles.tableCell}>{agendamento.nome_cliente}</td>
+                <td style={styles.tableCell}>{agendamento.contato_cliente}</td> {/* Exibindo o contato */}
                 <td style={styles.tableCell}>{new Date(agendamento.data_agendamento).toLocaleDateString()}</td>
                 <td style={styles.tableCell}>
                   <button
@@ -135,11 +136,11 @@ function AgendamentosList() {
                     Editar
                   </button>
                   <button
-  style={{ ...styles.button, ...styles.buttonHover }}
-  onClick={() => handleDelete(agendamento.id_agendamento)}
->
-  Excluir
-</button>
+                    style={{ ...styles.button, ...styles.buttonHover }}
+                    onClick={() => handleDelete(agendamento.id_agendamento)}
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))}

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importando useNavigate
 
 function CadastroFerramenta() {
   const [formData, setFormData] = useState({
     categoria: '',
     nome_ferramenta: '',
   });
+
+  const navigate = useNavigate(); // Colocando o useNavigate aqui
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,7 +17,7 @@ function CadastroFerramenta() {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:4000/api/ferramentas', {
+      const response = await fetch('http://localhost:3010/api/ferramentas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,9 +25,11 @@ function CadastroFerramenta() {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
+    
+if (response.ok) {
         alert('Ferramenta cadastrada com sucesso!');
         setFormData({ categoria: '', nome_ferramenta: '' });
+        navigate('/estoque'); // Redirecionando para a página de estoque
       } else {
         alert('Erro ao cadastrar ferramenta');
       }
@@ -33,7 +38,6 @@ function CadastroFerramenta() {
       alert('Erro de conexão com a API');
     }
   };
-
   return (
     <div style={styles.container}>
       <div style={styles.card}>

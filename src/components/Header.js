@@ -12,7 +12,6 @@ function Header() {
       <nav>
         <ul>
           <li><a href="#services">Serviços</a></li>
-          <li><Link to="/form">Contato</Link></li>
           <li><a href="#Portfolio">Portfolio</a></li>
           <li><a href="#ContentSection">Sobre nós</a></li>
         </ul>

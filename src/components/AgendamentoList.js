@@ -8,7 +8,7 @@ function AgendamentosList() {
   useEffect(() => {
     const fetchAgendamentos = async () => {
       try {
-        const response = await fetch('http://localhost:3010/api/agendamentos');
+        const response = await fetch('http://20.63.18.132:4000/api/agendamentos');
         const data = await response.json();
         setAgendamentos(data);
       } catch (error) {
@@ -33,7 +33,7 @@ function AgendamentosList() {
       return;
     }
   
-    fetch(`http://localhost:3010/api/agendamentos/${id}`, {
+    fetch(`http://20.63.18.132:4000/api/agendamentos/${id}`, {
       method: 'DELETE',
     })
       .then((response) => {

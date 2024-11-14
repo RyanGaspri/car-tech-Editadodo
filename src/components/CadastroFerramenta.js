@@ -17,7 +17,7 @@ function CadastroFerramenta() {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:3010/api/ferramentas', {
+      const response = await fetch('http://20.63.18.132:4000/api/ferramentas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

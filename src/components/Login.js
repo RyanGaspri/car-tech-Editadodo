@@ -10,8 +10,8 @@ function Login() {
   const [password, setPassword] = useState('');
 
   // Strings fixas para validação
-  const FIXED_USERNAME = 'teste12';
-  const FIXED_PASSWORD = '12345678910';
+  const FIXED_USERNAME = 'joao1234';
+  const FIXED_PASSWORD = 'carro4321';
 
   const handleSubmit = (e) => {
     e.preventDefault();

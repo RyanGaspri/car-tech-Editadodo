@@ -24,7 +24,7 @@ function Agendamento() {
     const updatedFormData = { ...formData, data_agendamento: formattedDate };
   
     try {
-      const response = await fetch('http://localhost:3010/api/agendamentos', {
+      const response = await fetch('http://20.63.18.132:4000/api/agendamentos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

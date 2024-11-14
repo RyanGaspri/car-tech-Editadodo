@@ -28,7 +28,7 @@ function EditItemForm() {
 
     try {
       // Envia os dados atualizados para o backend
-      const response = await fetch(`http://localhost:3010/api/ferramentas/${item.id_ferramenta}`, {
+      const response = await fetch(`http://20.63.18.132:4000/api/ferramentas/${item.id_ferramenta}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

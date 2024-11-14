@@ -5,32 +5,23 @@ import Footer from './Footer';
 import Header from './Header';
 
 function Login() {
-  const navigate = useNavigate(); // Inicializa o hook de navegação
-  const [username, setUsername] = useState(''); // Estado para o username
-  const [password, setPassword] = useState(''); // Estado para a password
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Evita o comportamento padrão de recarregar a página
+  // Strings fixas para validação
+  const FIXED_USERNAME = 'teste12';
+  const FIXED_PASSWORD = '12345678910';
 
-    try {
-      const response = await fetch('http://localhost:3010/api/administradores/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-      if (response.ok) {
-        const data = await response.json(); // Extrai a resposta JSON
-        alert('Login bem-sucedido!'); // Alerta de sucesso
-        navigate('/estoque'); // Redireciona para a página de Estoque
-      } else {
-        alert('Login falhou! Verifique suas credenciais.'); // Alerta de erro
-      }
-    } catch (error) {
-      console.error('Erro ao fazer login:', error); // Log do erro
-      alert('Ocorreu um erro ao fazer login.'); // Alerta de erro
+    // Verificar credenciais fixas
+    if (username === FIXED_USERNAME && password === FIXED_PASSWORD) {
+      alert('Login bem-sucedido!');
+      navigate('/estoque'); // Redireciona para a página de Estoque
+    } else {
+      alert('Login falhou! Verifique suas credenciais.');
     }
   };
 
@@ -39,22 +30,22 @@ function Login() {
       <Header />
       <div style={styles.container}>
         <form style={styles.form} onSubmit={handleSubmit}>
-          <label style={styles.label}>Email</label>
+          <label style={styles.label}>Usuario</label>
           <input
             type="text"
             style={styles.input}
-            placeholder="Value"
+            placeholder="usuario"
             value={username}
-            onChange={(e) => setUsername(e.target.value)} // Atualiza o estado do username
+            onChange={(e) => setUsername(e.target.value)}
           />
 
           <label style={styles.label}>Senha</label>
           <input
             type="password"
             style={styles.input}
-            placeholder="Value"
+            placeholder="senha"
             value={password}
-            onChange={(e) => setPassword(e.target.value)} // Atualiza o estado da password
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <button type="submit" style={styles.button}>Sign In</button>
